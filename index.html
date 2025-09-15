@@ -81,10 +81,10 @@
   <div class="card" role="main">
     <div class="top-line">
       <label for="slider">Input your phone number here:</label>
-      <div class="phone" id="phoneDisplay">+7XXXXXXXXX</div>
+      <div class="phone" id="phoneDisplay">+7XXXXXXXXXX</div>
     </div>
     <div class="slider-wrap">
-      <input id="slider" type="range" min="0" max="999999999" step="1" value="500000000" aria-label="phone-slider" />
+      <input id="slider" type="range" min="0" max="9999999999" step="1" value="5000000000" aria-label="phone-slider" />
     </div>
   </div>
   <script>
@@ -106,13 +106,14 @@
       const pct = (slider.value - slider.min) / (slider.max - slider.min) * 100;
       slider.style.setProperty('--pct', pct + '%');
     }
-    function randomNineDigits(){
-      const n = Math.floor(Math.random() * 1e9);
-      return String(n).padStart(9, '0');
+    function randomNDigits(n){
+      const max = Math.pow(10, n);
+      const num = Math.floor(Math.random() * max);
+      return String(num).padStart(n, '0');
     }
     let PREFIX = Math.random() < 0.5 ? '+7' : '+9';
     function showRandom(){
-      const digits = randomNineDigits();
+      const digits = randomNDigits(10);
       phoneDisplay.textContent = PREFIX + digits;
     }
     function getThumbX(){
