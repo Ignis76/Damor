@@ -2,158 +2,168 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Damor moment</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Damor moment — mobile</title>
   <style>
     :root{
-      --track-height: 10px;
-      --thumb-size: 18px;
-      --accent: #2b8cff;
-      --card: #ffffff;
+      --space:16px;
+      --card-radius:12px;
+      --accent:#2b8cff;
+      --bg-start:#f0f3f6;
+      --bg-end:#fff;
+      --track-height:14px;
+      --thumb-size:32px;
+      --thumb-hit-radius:28px;
+      --font-base:17px;
     }
+    @media(min-width:720px){
+      :root{
+        --track-height:10px;
+        --thumb-size:22px;
+        --thumb-hit-radius:18px;
+        --font-base:16px;
+      }
+    }
+    html,body{height:100%;margin:0;padding:0;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
     body{
-      font-family: Inter, system-ui, "Segoe UI", Roboto, Arial;
-      background: linear-gradient(180deg,#f0f3f6,#fff);
-      padding:40px;
+      font-family:Inter, system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+      background:linear-gradient(180deg,var(--bg-start),var(--bg-end));
+      padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
       display:flex;
       align-items:center;
       justify-content:center;
-      height:100vh;
-      margin:0;
+      min-height:100vh;
+      box-sizing:border-box;
     }
     .card{
-      background:var(--card);
-      padding:22px 26px;
-      border-radius:12px;
-      box-shadow:0 6px 24px rgba(20,30,50,0.08);
-      width:720px;
-      max-width:95%;
-    }
-    .row{
-      display:flex;
-      align-items:center;
-      gap:16px;
-    }
-    label{
-      min-width:170px;
-      color:#333;
-      font-weight:600;
-    }
-    .slider-wrap{
-      flex:1;
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-    input[type="range"]{
-      -webkit-appearance:none;
-      appearance:none;
       width:100%;
-      height:var(--track-height);
+      max-width:900px;
+      background:#fff;
+      border-radius:var(--card-radius);
+      box-shadow:0 8px 30px rgba(20,30,50,0.08);
+      padding:18px;
+      box-sizing:border-box;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      align-items:stretch;
+    }
+    .top-line{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;}
+    label{font-weight:700;color:#0b2547;font-size:var(--font-base);margin:0;}
+    .slider-wrap{width:100%;display:block;margin-top:6px;}
+    input[type="range"]{
+      -webkit-appearance:none;appearance:none;width:100%;height:var(--track-height);
       background:linear-gradient(90deg,var(--accent) 0%, var(--accent) var(--pct,50%), #e6eefc var(--pct,50%), #e9eef6 100%);
-      border-radius:10px;
-      outline:none;
-      transition: background 0.12s;
-      touch-action: none; 
+      border-radius:999px;outline:none;transition:background 0.12s;touch-action:none;
     }
     input[type="range"]::-webkit-slider-thumb{
-      -webkit-appearance:none;
-      width:var(--thumb-size);
-      height:var(--thumb-size);
-      border-radius:50%;
-      background:#fff;
-      border:4px solid var(--accent);
-      box-shadow:0 2px 6px rgba(40,50,90,0.12);
-      margin-top: calc((var(--track-height) - var(--thumb-size))/2);
-      cursor:grab;
+      -webkit-appearance:none;appearance:none;width:var(--thumb-size);height:var(--thumb-size);
+      border-radius:50%;background:#fff;border:4px solid var(--accent);box-shadow:0 4px 18px rgba(40,50,90,0.12);
+      margin-top:calc((var(--track-height) - var(--thumb-size))/2);cursor:grab;
     }
-    input[type="range"]:active::-webkit-slider-thumb { cursor:grabbing; }
+    input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing;}
+    input[type="range"]::-moz-range-thumb{
+      width:var(--thumb-size);height:var(--thumb-size);border-radius:50%;border:4px solid var(--accent);
+      background:#fff;box-shadow:0 4px 18px rgba(40,50,90,0.12);cursor:grab;
+    }
     .phone{
-      min-width:200px;
-      text-align:left;
-      font-size:18px;
-      font-weight:700;
-      color:#0b2547;
-      background:linear-gradient(180deg,#fff,#f6fbff);
-      padding:10px 14px;
-      border-radius:8px;
-      box-shadow:inset 0 -1px 0 rgba(0,0,0,0.02);
+      display:inline-block;padding:12px 14px;border-radius:10px;background:linear-gradient(180deg,#fff,#f6fbff);
+      box-shadow:inset 0 -1px 0 rgba(0,0,0,0.03);font-weight:800;font-size:18px;color:#0b2547;
+      min-width:160px;text-align:center;box-sizing:border-box;
+    }
+    @media(min-width:560px){
+      .card{gap:16px;}
+      .slider-wrap{flex:1;margin:0 12px;}
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="row">
+  <div class="card" role="main">
+    <div class="top-line">
       <label for="slider">Input your phone number here:</label>
-      <div class="slider-wrap">
-        <input id="slider" type="range" min="0" max="999999999" step="1" value="500000000" aria-label="phone-slider" />
-      </div>
-      <div class="phone" id="phoneDisplay">+777000000000</div>
+      <div class="phone" id="phoneDisplay">+7XXXXXXXXX</div>
+    </div>
+    <div class="slider-wrap">
+      <input id="slider" type="range" min="0" max="999999999" step="1" value="500000000" aria-label="phone-slider" />
     </div>
   </div>
-
   <script>
     const slider = document.getElementById('slider');
     const phoneDisplay = document.getElementById('phoneDisplay');
-    const countryCode = '+777';
-
-    function updateTrackPercent() {
+    function getThumbHitRadius(){
+      const cs = getComputedStyle(document.documentElement);
+      const v = cs.getPropertyValue('--thumb-hit-radius').trim();
+      const px = v ? parseFloat(v.replace('px','')) : null;
+      if(!px || isNaN(px)){
+        const ts = cs.getPropertyValue('--thumb-size').trim();
+        const tsv = ts ? parseFloat(ts.replace('px','')) : 32;
+        return Math.max(20, tsv * 0.8);
+      }
+      return px;
+    }
+    let THUMB_HIT = getThumbHitRadius();
+    function updateTrackPercent(){
       const pct = (slider.value - slider.min) / (slider.max - slider.min) * 100;
       slider.style.setProperty('--pct', pct + '%');
     }
-
-    function randomNineDigits() {
-      const n = Math.floor(Math.random() * 1e9); // 0 .. 999 999 999
+    function randomNineDigits(){
+      const n = Math.floor(Math.random() * 1e9);
       return String(n).padStart(9, '0');
     }
-
-    function onInputShowRandom() {
+    let PREFIX = Math.random() < 0.5 ? '+7' : '+9';
+    function showRandom(){
       const digits = randomNineDigits();
-      phoneDisplay.textContent = countryCode + digits;
-      updateTrackPercent();
+      phoneDisplay.textContent = PREFIX + digits;
     }
-
-    function isPointerOnThumb(clientX) {
+    function getThumbX(){
       const rect = slider.getBoundingClientRect();
       const min = Number(slider.min), max = Number(slider.max);
       const val = Number(slider.value);
       const ratio = (val - min) / (max - min);
-      const thumbX = rect.left + ratio * rect.width;
-      const thumbRadius = 18; 
-      return Math.abs(clientX - thumbX) <= thumbRadius;
+      return rect.left + ratio * rect.width;
     }
-
+    function isPointerOnThumb(clientX){
+      const thumbX = getThumbX();
+      return Math.abs(clientX - thumbX) <= THUMB_HIT;
+    }
     slider.addEventListener('pointerdown', (e) => {
-      if (!isPointerOnThumb(e.clientX)) {
-        e.preventDefault();
-        e.stopPropagation();
-        slider.blur();
-        return;
+      if(typeof e.clientX === 'number'){
+        if(!isPointerOnThumb(e.clientX)){
+          e.preventDefault();
+          e.stopPropagation();
+          slider.blur();
+          return;
+        }
       }
-    }, {passive: false});
-
+    }, {passive:false});
     slider.addEventListener('touchstart', (e) => {
-      const t = e.touches[0];
-      if (t && !isPointerOnThumb(t.clientX)) {
-        e.preventDefault();
-        e.stopPropagation();
-        slider.blur();
+      const t = e.touches && e.touches[0];
+      if(t && typeof t.clientX === 'number'){
+        if(!isPointerOnThumb(t.clientX)){
+          e.preventDefault();
+          e.stopPropagation();
+          slider.blur();
+        }
       }
-    }, {passive: false});
-
-    slider.addEventListener('input', onInputShowRandom);
-
+    }, {passive:false});
     slider.addEventListener('click', (e) => {
-      if (!isPointerOnThumb(e.clientX)) {
+      if(typeof e.clientX === 'number' && !isPointerOnThumb(e.clientX)){
         e.preventDefault();
         e.stopPropagation();
         slider.blur();
       }
-    }, {passive: false});
-
+    }, {passive:false});
+    slider.addEventListener('input', () => {
+      showRandom();
+      updateTrackPercent();
+    });
     window.addEventListener('load', () => {
-      const init = randomNineDigits();
-      phoneDisplay.textContent = countryCode + init;
+      showRandom();
+      updateTrackPercent();
+      THUMB_HIT = getThumbHitRadius();
+    });
+    window.addEventListener('resize', () => {
+      THUMB_HIT = getThumbHitRadius();
       updateTrackPercent();
     });
   </script>
