@@ -3,50 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Legacy of Orkhon: The Voice of Stone</title>
+    <title>Legacy of Orkhon: The Stone Chronicles</title>
     
-    <!-- Premium Fonts -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Cormorant+Garamond:ital,wght@0,300;0,500;0,700;1,400&family=Noto+Sans+Old+Turkic&display=swap" rel="stylesheet">
 
     <style>
-        /* --- DESIGN SETTINGS --- */
+        /* --- CORE SETTINGS --- */
         :root {
-            --bg-color: #1a1a1a; /* Dark Stone */
-            --text-color: #e0e0e0; /* Light Grey Text */
-            --accent-gold: #c5a059; /* Scythian Gold */
-            --accent-blue: #4a6fa5; /* Tengri Blue */
-            --secondary-text: #a0a0a0;
-            
-            --font-title: 'Cinzel', serif;
-            --font-body: 'Cormorant Garamond', serif;
-            --font-runes: 'Noto Sans Old Turkic', sans-serif;
+            --bg-color: #121212;
+            --text-color: #d1d1d1;
+            --accent-gold: #c5a059;
+            --accent-blue: #5b7da3;
+            --stone-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--bg-color);
+            background-image: var(--stone-texture);
             color: var(--text-color);
-            font-family: var(--font-body);
+            font-family: 'Cormorant Garamond', serif;
             line-height: 1.8;
-            font-size: 20px;
+            font-size: 1.2rem;
             overflow-x: hidden;
-            /* Subtle Stone Texture */
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.07'/%3E%3C/svg%3E");
         }
 
-        /* --- SCROLLBAR --- */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-color); }
-        ::-webkit-scrollbar-thumb { background: var(--accent-gold); border-radius: 4px; }
+        h1, h2, h3 { font-family: 'Cinzel', serif; text-transform: uppercase; }
+        
+        .highlight { color: var(--accent-gold); font-weight: 600; }
+        .blue-highlight { color: var(--accent-blue); font-weight: 600; }
 
-        /* --- HEADER --- */
+        /* --- HEADER HERO --- */
         header {
             height: 100vh;
             display: flex;
@@ -55,313 +46,313 @@
             align-items: center;
             text-align: center;
             position: relative;
-            padding: 0 20px;
-            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(18,18,18,1)), 
+                        url('https://upload.wikimedia.org/wikipedia/commons/e/e0/Orkhon_Valley.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
         .hero-runes {
-            font-family: var(--font-runes);
-            font-size: 3rem;
+            font-family: 'Noto Sans Old Turkic', sans-serif;
+            font-size: 4rem;
             color: var(--accent-blue);
-            opacity: 0.8;
+            text-shadow: 0 0 20px rgba(91, 125, 163, 0.6);
             margin-bottom: 20px;
-            letter-spacing: 10px;
-            text-shadow: 0 0 15px rgba(74, 111, 165, 0.5);
+            animation: pulse 3s infinite;
         }
 
         h1 {
-            font-family: var(--font-title);
-            font-size: 4rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+            font-size: 3.5rem;
             color: var(--accent-gold);
+            letter-spacing: 0.15em;
             margin-bottom: 10px;
-            background: linear-gradient(to bottom, #ebd197, #c5a059);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .subtitle {
-            font-size: 1.5rem;
-            color: var(--secondary-text);
-            max-width: 600px;
-            font-style: italic;
+            border-bottom: 2px solid var(--accent-gold);
+            padding-bottom: 10px;
         }
 
         .scroll-indicator {
             position: absolute;
-            bottom: 40px;
+            bottom: 30px;
+            color: #fff;
             font-size: 2rem;
-            color: var(--accent-gold);
-            animation: float 2s infinite ease-in-out;
-            cursor: pointer;
+            animation: bounce 2s infinite;
         }
 
-        /* --- MAIN CONTENT --- */
-        main {
-            max-width: 900px;
+        /* --- LAYOUT UTILITIES --- */
+        .container {
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 100px 20px;
+            padding: 0 20px;
         }
 
-        /* Article/Chapter Styling */
-        article {
-            position: relative;
-            margin-bottom: 120px;
-            padding-left: 40px;
-            border-left: 2px solid rgba(197, 160, 89, 0.2);
-            opacity: 0; /* Hidden for animation */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin: 120px 0;
+            opacity: 0;
             transform: translateY(30px);
             transition: all 0.8s ease-out;
         }
 
-        article.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .content-grid.visible { opacity: 1; transform: translateY(0); }
+        .content-grid.reverse .text-col { order: 2; }
+        .content-grid.reverse .img-col { order: 1; }
 
-        /* Chapter Marker */
-        article::before {
-            content: "✦";
-            position: absolute;
-            left: -11px;
-            top: 0;
-            color: var(--accent-gold);
-            background: var(--bg-color);
-            padding: 5px 0;
-            font-size: 1.2rem;
-        }
-
-        .question-header {
-            font-family: var(--font-title);
-            font-size: 1.8rem;
-            color: var(--accent-blue);
-            margin-bottom: 30px;
-            line-height: 1.3;
-        }
-
-        .answer-text {
-            color: var(--text-color);
-            text-align: justify;
-            font-size: 1.25rem;
-        }
-
-        /* Drop Cap */
-        .answer-text::first-letter {
-            float: left;
-            font-family: var(--font-title);
-            font-size: 4rem;
-            line-height: 0.8;
-            padding-right: 15px;
-            padding-top: 5px;
-            color: var(--accent-gold);
-        }
-
-        /* Highlight */
-        .highlight {
-            color: var(--accent-gold);
-            font-weight: 600;
-        }
-
-        /* Quotes */
-        blockquote {
-            margin: 40px 0;
-            padding: 20px 40px;
-            border-left: 4px solid var(--accent-blue);
-            background: rgba(74, 111, 165, 0.1);
-            font-style: italic;
-            color: #dbe9f6;
-            font-family: var(--font-body);
-        }
-
-        /* Separator */
-        .separator {
-            text-align: center;
+        .text-col h2 {
             font-size: 2rem;
-            color: var(--secondary-text);
-            margin: 80px 0;
-            opacity: 0.3;
+            color: var(--accent-blue);
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent-gold);
+            padding-left: 20px;
         }
 
-        /* --- FOOTER --- */
+        .img-wrapper {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #333;
+            box-shadow: 10px 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: sepia(20%) contrast(110%) brightness(0.9); 
+            transition: transform 0.5s ease;
+        }
+
+        .img-wrapper:hover img { transform: scale(1.05); }
+
+        .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: #aaa;
+            font-size: 0.8rem;
+            padding: 8px;
+            text-align: center;
+            font-family: sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .parallax-section {
+            height: 600px;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin: 100px 0;
+        }
+
+        .parallax-overlay {
+            background: rgba(0,0,0,0.7);
+            padding: 40px;
+            max-width: 800px;
+            text-align: center;
+            border: 1px solid var(--accent-gold);
+            backdrop-filter: blur(5px);
+        }
+
+        .parallax-overlay blockquote {
+            font-size: 1.8rem;
+            font-style: italic;
+            color: #fff;
+            font-family: 'Cinzel', serif;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 100px 0;
+        }
+
+        .detail-card {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-top: 3px solid var(--accent-gold);
+        }
+
+        /* --- HARARI SECTION STYLES --- */
+        .harari-quote {
+            font-style: italic;
+            border-left: 2px solid var(--accent-gold);
+            padding-left: 15px;
+            margin: 20px 0;
+            color: #aaa;
+        }
+
         footer {
             text-align: center;
-            padding: 60px 20px;
-            border-top: 1px solid rgba(197, 160, 89, 0.2);
-            color: var(--secondary-text);
+            padding: 60px;
+            background: #000;
+            border-top: 1px solid #333;
             font-size: 0.9rem;
+            color: #666;
         }
 
-        /* --- ANIMATIONS --- */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(10px); }
-        }
+        @keyframes pulse { 0% { opacity: 0.7; } 50% { opacity: 1; } 100% { opacity: 0.7; } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            article { padding-left: 0; border-left: none; }
-            article::before { display: none; }
-            .hero-runes { font-size: 2rem; }
+            h1 { font-size: 2.2rem; }
+            .content-grid { grid-template-columns: 1fr; gap: 30px; margin: 60px 0; }
+            .content-grid.reverse .text-col { order: 1; }
+            .content-grid.reverse .img-col { order: 2; }
+            .parallax-section { height: 400px; background-attachment: scroll; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="hero-runes">𐱅𐰇𐰼𐰰:𐰉𐰆𐰑𐰣</div> <!-- Turk Bodun (Turkic People) -->
-        <h1>The Eternal Inscription</h1>
-        <p class="subtitle">Deciphering Kül Tigin: Politics, Cosmos, and War</p>
+        <div class="hero-runes">𐱅𐰇𐰼𐰰</div>
+        <h1>Legacy of Orkhon</h1>
+        <p style="font-style: italic; opacity: 0.8; font-size: 1.5rem;">"I carved these words on eternal stone..."</p>
         <div class="scroll-indicator">↓</div>
     </header>
 
-    <main>
+    <main class="container">
 
-        <!-- Intro -->
-        <div style="text-align: center; margin-bottom: 100px;">
-            <p style="font-size: 1.4rem; color: var(--accent-gold);">
-                "When the blue sky was created above and the dark earth below, between them the sons of men were created..."
+        <!-- INTRO -->
+        <div style="text-align: center; margin: 100px auto; max-width: 700px;">
+            <p><span class="highlight" style="font-size: 3rem; line-height: 1; float: left; padding-right: 10px;">T</span>he Orkhon Inscriptions are not just history; they are the voice of a civilization. Located in the vast Mongolian steppes, these monoliths tell the story of the Göktürks (Celestial Turks) — their rise, their philosophy, and their warnings to future generations.</p>
+        </div>
+
+        <!-- I. COSMIC ORDER -->
+        <div class="content-grid">
+            <div class="text-col">
+                <h2>I. The Cosmic Order</h2>
+                <p>The inscription begins with the creation of the universe: <span class="blue-highlight">"When the blue sky was created above and the dark earth below..."</span></p>
+                <p>This is the foundation of Turkic legitimacy. The Kagan was not just a warlord; he was the center of a cosmic link. His rule was mandated by <strong>Tengri</strong> (Heaven). If the Kagan ruled wisely, the seasons would be regular and the herds would multiply. Political stability mirrored cosmic harmony.</p>
+            </div>
+            <div class="img-col">
+                <div class="img-wrapper">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBATaoSDztMYzoyueBNFhPn8FnveUYiynBhg&s" alt="Orkhon Valley">
+                    <div class="caption">The Orkhon Valley: The Sacred Center</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- II. ARCHITECT -->
+        <div class="content-grid reverse">
+            <div class="text-col">
+                <h2>II. The Architect of the Empire</h2>
+                <p>The text describes the Kagan as one who "organized and created" (Il etmis). Leadership was more than power; it was about building institutions.</p>
+                <p>Kül Tigin and Bilge Kagan are portrayed as the guardians of the <strong>"El"</strong> (State) and <strong>"Tore"</strong> (Law). The inscription emphasizes meritocracy: the empire fell when "foolish Kagans sat on the throne" and "cowardly Begs" led the armies. It is a timeless lesson on the quality of leadership.</p>
+            </div>
+            <div class="img-col">
+                <div class="img-wrapper">
+                    <img src="https://avatars.mds.yandex.net/i?id=1e02936e0181b7c3c9eb5c390acac2d6b16a7b29-5424730-images-thumbs&n=13" alt="Mukan Kagan">
+                    <div class="caption">Mukan Kagan</div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- III. WARFARE PARALLAX -->
+    <div class="parallax-section" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/8/82/Gokturk_Empire_map.png'); filter: grayscale(50%);">
+        <div class="parallax-overlay">
+            <h3>III. The Sword and The Shield</h3>
+            <br>
+            <blockquote>
+                "I did not sleep by night nor rest by day. I shed my red blood and sweated my black sweat for the people."
+            </blockquote>
+            <p style="margin-top: 20px; font-size: 1rem; color: #ddd;">Warfare was the circulatory system of the empire. The "Iron Gate" in the west and the "Forest of Qadirkhan" in the east were not just borders—they were proofs of divine favor.</p>
+        </div>
+    </div>
+
+    <main class="container">
+
+        <!-- IV. ETERNAL STONE GRID -->
+        <h2 style="text-align: center; margin-bottom: 50px; color: var(--accent-gold);">IV. The Eternal Stone</h2>
+        <div class="details-grid">
+            <div class="detail-card">
+                <h3>Preserving Memory</h3>
+                <p>Why write on stone? Paper burns, silk rots, but stone endures. These steles were a <span class="highlight">political testament</span> meant to defeat time itself. They were placed at crossroads so all could read them.</p>
+            </div>
+            <div class="detail-card">
+                <div class="img-wrapper" style="height: 200px; margin-bottom: 20px;">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsdLw1-q2nMMQSIrF55JYha7CuNHbPl8Eymg&s" style="object-fit: cover; height: 100%;" alt="Runic Script">
+                </div>
+                <h3>Unified Identity</h3>
+                <p>The inscriptions created a shared consciousness. By reading "We, the Turks," a dispersed nomad felt part of a single, great entity. It was nation-building through literacy.</p>
+            </div>
+            <div class="detail-card">
+                <h3>The Warning</h3>
+                <p>The most chilling part of the text is the warning: <span class="highlight">"Do not be deceived by soft silk and sweet words."</span> It teaches that assimilation and loss of culture are more dangerous than any army.</p>
+            </div>
+        </div>
+
+        <!-- V. MAP SECTION -->
+        <div style="margin-bottom: 100px;">
+            <h2 style="text-align: center; margin-bottom: 30px;">V. Scale of Dominion</h2>
+            <div class="img-wrapper" style="max-height: 500px;">
+                <img src="https://wa-cdn.nyc3.cdn.digitaloceanspaces.com/user-data/production/ee5e943f-5b2b-4b45-bc73-00ae64388dc6/uploads/images/ca65274bbe1266d7ecda9b61076b07c0.png" alt="Map of Khaganate">
+                <div class="caption">The vast expanse of the Göktürk Empire at its height</div>
+            </div>
+            <p style="margin-top: 20px; text-align: justify;">
+                The text references distant lands—from the Kadirkhan forest (Greater Khingan) to the Iron Gate (Derbent). This vast geography legitimized the Kagan's rule over the "Four Corners of the World."
             </p>
         </div>
 
-        <!-- Section 1: Cosmology -->
-        <article>
-            <h2 class="question-header">I. Worldview: "Blue Sky" and "Dark Earth"</h2>
-            <div class="answer-text">
-                The reference to the <span class="highlight">"Blue Sky" (Tengri)</span> and the "Dark Earth" is not merely poetic metaphor. It is the foundation of political legitimacy. The Kök Turks believed their state was divinely sanctioned, and the Kagan’s power was bestowed by Heaven itself.
-                <br><br>
-                They viewed themselves as the center of a cosmic order, where political stability on earth depended directly on harmony with celestial forces. Chaos in the state meant a violation of Tengri’s will.
+        <!-- VI. HARARI SECTION (NEW) -->
+        <div class="content-grid">
+            <div class="img-col">
+                <div class="img-wrapper">
+                    <!-- Yuval Noah Harari Photo -->
+                    <img src="https://i5.walmartimages.com/seo/Sapiens-de-Animales-a-Dioses-Sapiens-a-Brief-History-of-Humankind-Paperback-9788499926223_ad80d64a-faa6-4b76-a0f2-e6099cacbd30.f9c916e9ea2185950b2c501aff32bc00.jpeg" alt="Yuval Noah Harari">
+                    <div class="caption">Yuval Noah Harari, Historian</div>
+                </div>
             </div>
-        </article>
-
-        <div class="separator">❖</div>
-
-        <!-- Section 2: Leadership -->
-        <article>
-            <h2 class="question-header">II. The Kagan: Architect of the Empire</h2>
-            <div class="answer-text">
-                The inscription depicts a ruler who "organized and created." This implies that leadership in the Khaganate went far beyond military command.
-                <br><br>
-                The Kagan was the <span class="highlight">Guardian of Institutions (El)</span> and Laws (Tore). His power was sacred, yet it carried the heavy burden of responsibility: to unite the tribes, establish just laws, and ensure the prosperity of society. It was a meritocracy sanctified by tradition.
+            <div class="text-col">
+                <h2>VI. A Modern Lens: Harari's Interpretation</h2>
+                <p>In his book <em>Sapiens</em>, historian Yuval Noah Harari discusses the unique human ability to cooperate in large numbers through <strong>"Imagined Orders"</strong>.</p>
+                <div class="harari-quote">
+                    "You can never convince a monkey to give you a banana by promising him limitless bananas after death in monkey heaven... But you can convince millions of people to build a cathedral or go to war."
+                </div>
+                <p>The Orkhon Inscriptions are a prime example of creating an "Imagined Order." The <span class="highlight">"Eternal El" (State)</span> and the concept of a unified "Turkic People" did not exist physically in nature. They were stories—myths—carved into stone by the Kagans.</p>
+                <p>By establishing this shared myth, the Kagans allowed thousands of strangers from different tribes to trust one another, pay taxes, and fight for a single cause. The stone was the "mass media" of its time, cementing the fiction that made the empire real.</p>
             </div>
-        </article>
-
-        <div class="separator">❖</div>
-
-        <!-- Section 3: Warfare -->
-        <article>
-            <h2 class="question-header">III. Sword and Power: The Role of War</h2>
-            <div class="answer-text">
-                War was the empire's circulatory system. The text speaks openly of subduing enemies ("I made those with heads bow down").
-                <blockquote>
-                    "For the sake of the Turkic people, I did not sleep by night nor rest by day."
-                </blockquote>
-                Military success not only ensured security in the harsh steppe environment but served as the primary proof that Heaven favored the ruler. Without victory, there was no legitimacy.
-            </div>
-        </article>
-
-        <div class="separator">❖</div>
-
-        <!-- Section 4: Qualities -->
-        <article>
-            <h2 class="question-header">IV. Wisdom and Bravery</h2>
-            <div class="answer-text">
-                Imperial stability rested on personal example. The inscription emphasizes: the Kagans were wise, and the Beys (officers) were brave.
-                <br><br>
-                The justice of the leaders created a <span class="highlight">vertical of trust</span>. When the elite is just, the people (Bodun) are loyal. The collapse of the empire is often linked in the text specifically to the degradation of elites—when "foolish Kagans" and "cowardly Beys" ascended to power.
-            </div>
-        </article>
-
-        <div class="separator">❖</div>
-
-        <!-- Section 5: Purpose -->
-        <article>
-            <h2 class="question-header">V. Memory in Stone</h2>
-            <div class="answer-text">
-                Why did they write on stone? To defeat time. The Orkhon inscriptions are a political testament.
-                <br><br>
-                By recording their achievements, the Turks were constructing a <span class="highlight">unified identity</span>. Reading these lines, a descendant was meant to feel not just a member of a tribe, but pride in the great "Eternal El." It was a tool for nation-building through shared historical memory.
-            </div>
-        </article>
-
-        <div class="separator">❖</div>
-
-        <!-- Section 6: Geography -->
-        <article>
-            <h2 class="question-header">VI. Scale of Empire: From Qadirkhan to the Iron Gate</h2>
-            <div class="answer-text">
-                Geographic markers (the "Forest of Qadirkhan" in the East, the "Iron Gate" in the West) serve as proof of geopolitical might.
-                <br><br>
-                Listing distant lands legitimizes the Turks' right to dominate Eurasia. It is a message to the reader: "Look how far the hand of your Kagan reaches." This inspired fear in enemies and pride in subjects.
-            </div>
-        </article>
-
-        <div class="separator">❖</div>
-
-        <!-- Section 7: Pride -->
-        <article>
-            <h2 class="question-header">VII. Heritage and Pride</h2>
-            <div class="answer-text">
-                The inscription is permeated with a sense of dignity. It does not plead; it asserts.
-                <br><br>
-                The text constructs the image of the Turks as a victor-nation, a people with a great destiny. Even when describing past defeats, the author does so to highlight subsequent resurgence and resilience. It is a manifesto of power, designed to convince the world of the empire's endurance.
-            </div>
-        </article>
-
-        <div class="separator">❖</div>
-
-        <!-- Section 8: Lessons -->
-        <article>
-            <h2 class="question-header">VIII. A Covenant for the Future</h2>
-            <div class="answer-text">
-                The main lesson of the inscription is a warning.
-                <br><br>
-                <span class="highlight">"O Turkic people, if you go to China, you will perish."</span><br>
-                The stone teaches that strength lies in unity and loyalty to ancestral traditions. The sweetness of foreign words and the softness of silk are traps. Only by preserving their culture and obeying wise leaders can the nation remain eternal.
-            </div>
-        </article>
+        </div>
 
     </main>
 
     <footer>
-        <div class="hero-runes" style="font-size: 1.5rem; color: var(--accent-gold);">𐱅𐰇𐰼𐰰</div>
-        <p>© 2025 Historical Interactive Strategy.</p>
-        <p style="margin-top: 10px; font-size: 0.8rem; color: #555;">Designed for immersive learning.</p>
+        <div class="hero-runes" style="font-size: 2rem;">𐱅𐰇𐰼𐰰</div>
+        <p>Mastering History Series: The Turkic Era</p>
+        <p style="opacity: 0.5; font-size: 0.8rem; margin-top: 10px;">Images sourced from Wikimedia Commons.</p>
+        <p style="color: var(--accent-gold); margin-top: 20px;">© 2025 Interactive Historical Strategy</p>
     </footer>
 
     <script>
-        // --- Scroll Animation Logic ---
-        
         document.addEventListener('DOMContentLoaded', () => {
-            const articles = document.querySelectorAll('article');
+            const observerOptions = { threshold: 0.2 };
 
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.2 // Element must be 20% visible
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        // Uncomment line below if you want animation to play only once:
-                        // observer.unobserve(entry.target);
                     }
                 });
             }, observerOptions);
 
-            articles.forEach(article => {
-                observer.observe(article);
-            });
-            
-            // Scroll on arrow click
+            const elements = document.querySelectorAll('.content-grid');
+            elements.forEach(el => observer.observe(el));
+
             document.querySelector('.scroll-indicator').addEventListener('click', () => {
-                window.scrollTo({
-                    top: window.innerHeight,
-                    behavior: 'smooth'
-                });
+                window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
             });
         });
     </script>
