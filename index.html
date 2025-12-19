@@ -1,178 +1,369 @@
-<!doctype html>
-<html lang="ru">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Damor moment — mobile</title>
-  <style>
-    :root{
-      --space:16px;
-      --card-radius:12px;
-      --accent:#2b8cff;
-      --bg-start:#f0f3f6;
-      --bg-end:#fff;
-      --track-height:14px;
-      --thumb-size:32px;
-      --thumb-hit-radius:28px;
-      --font-base:17px;
-    }
-    @media(min-width:720px){
-      :root{
-        --track-height:10px;
-        --thumb-size:22px;
-        --thumb-hit-radius:18px;
-        --font-base:16px;
-      }
-    }
-    html,body{height:100%;margin:0;padding:0;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
-    body{
-      font-family:Inter, system-ui, "Segoe UI", Roboto, Arial, sans-serif;
-      background:linear-gradient(180deg,var(--bg-start),var(--bg-end));
-      padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-height:100vh;
-      box-sizing:border-box;
-    }
-    .card{
-      width:100%;
-      max-width:900px;
-      background:#fff;
-      border-radius:var(--card-radius);
-      box-shadow:0 8px 30px rgba(20,30,50,0.08);
-      padding:18px;
-      box-sizing:border-box;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      align-items:stretch;
-    }
-    .top-line{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;}
-    label{font-weight:700;color:#0b2547;font-size:var(--font-base);margin:0;}
-    .slider-wrap{width:100%;display:block;margin-top:6px;}
-    input[type="range"]{
-      -webkit-appearance:none;appearance:none;width:100%;height:var(--track-height);
-      background:linear-gradient(90deg,var(--accent) 0%, var(--accent) var(--pct,50%), #e6eefc var(--pct,50%), #e9eef6 100%);
-      border-radius:999px;outline:none;transition:background 0.12s;touch-action:none;
-    }
-    input[type="range"]::-webkit-slider-thumb{
-      -webkit-appearance:none;appearance:none;width:var(--thumb-size);height:var(--thumb-size);
-      border-radius:50%;background:#fff;border:4px solid var(--accent);box-shadow:0 4px 18px rgba(40,50,90,0.12);
-      margin-top:calc((var(--track-height) - var(--thumb-size))/2);cursor:grab;
-    }
-    input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing;}
-    input[type="range"]::-moz-range-thumb{
-      width:var(--thumb-size);height:var(--thumb-size);border-radius:50%;border:4px solid var(--accent);
-      background:#fff;box-shadow:0 4px 18px rgba(40,50,90,0.12);cursor:grab;
-    }
-    .phone{
-      display:inline-block;padding:12px 14px;border-radius:10px;background:linear-gradient(180deg,#fff,#f6fbff);
-      box-shadow:inset 0 -1px 0 rgba(0,0,0,0.03);font-weight:800;font-size:18px;color:#0b2547;
-      min-width:160px;text-align:center;box-sizing:border-box;
-    }
-    @media(min-width:560px){
-      .card{gap:16px;}
-      .slider-wrap{flex:1;margin:0 12px;}
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legacy of Orkhon: The Voice of Stone</title>
+    
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Cormorant+Garamond:ital,wght@0,300;0,500;0,700;1,400&family=Noto+Sans+Old+Turkic&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- DESIGN SETTINGS --- */
+        :root {
+            --bg-color: #1a1a1a; /* Dark Stone */
+            --text-color: #e0e0e0; /* Light Grey Text */
+            --accent-gold: #c5a059; /* Scythian Gold */
+            --accent-blue: #4a6fa5; /* Tengri Blue */
+            --secondary-text: #a0a0a0;
+            
+            --font-title: 'Cinzel', serif;
+            --font-body: 'Cormorant Garamond', serif;
+            --font-runes: 'Noto Sans Old Turkic', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-body);
+            line-height: 1.8;
+            font-size: 20px;
+            overflow-x: hidden;
+            /* Subtle Stone Texture */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.07'/%3E%3C/svg%3E");
+        }
+
+        /* --- SCROLLBAR --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-gold); border-radius: 4px; }
+
+        /* --- HEADER --- */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 0 20px;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+        }
+
+        .hero-runes {
+            font-family: var(--font-runes);
+            font-size: 3rem;
+            color: var(--accent-blue);
+            opacity: 0.8;
+            margin-bottom: 20px;
+            letter-spacing: 10px;
+            text-shadow: 0 0 15px rgba(74, 111, 165, 0.5);
+        }
+
+        h1 {
+            font-family: var(--font-title);
+            font-size: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+            background: linear-gradient(to bottom, #ebd197, #c5a059);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--secondary-text);
+            max-width: 600px;
+            font-style: italic;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            font-size: 2rem;
+            color: var(--accent-gold);
+            animation: float 2s infinite ease-in-out;
+            cursor: pointer;
+        }
+
+        /* --- MAIN CONTENT --- */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 100px 20px;
+        }
+
+        /* Article/Chapter Styling */
+        article {
+            position: relative;
+            margin-bottom: 120px;
+            padding-left: 40px;
+            border-left: 2px solid rgba(197, 160, 89, 0.2);
+            opacity: 0; /* Hidden for animation */
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        article.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Chapter Marker */
+        article::before {
+            content: "✦";
+            position: absolute;
+            left: -11px;
+            top: 0;
+            color: var(--accent-gold);
+            background: var(--bg-color);
+            padding: 5px 0;
+            font-size: 1.2rem;
+        }
+
+        .question-header {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            color: var(--accent-blue);
+            margin-bottom: 30px;
+            line-height: 1.3;
+        }
+
+        .answer-text {
+            color: var(--text-color);
+            text-align: justify;
+            font-size: 1.25rem;
+        }
+
+        /* Drop Cap */
+        .answer-text::first-letter {
+            float: left;
+            font-family: var(--font-title);
+            font-size: 4rem;
+            line-height: 0.8;
+            padding-right: 15px;
+            padding-top: 5px;
+            color: var(--accent-gold);
+        }
+
+        /* Highlight */
+        .highlight {
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        /* Quotes */
+        blockquote {
+            margin: 40px 0;
+            padding: 20px 40px;
+            border-left: 4px solid var(--accent-blue);
+            background: rgba(74, 111, 165, 0.1);
+            font-style: italic;
+            color: #dbe9f6;
+            font-family: var(--font-body);
+        }
+
+        /* Separator */
+        .separator {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--secondary-text);
+            margin: 80px 0;
+            opacity: 0.3;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            border-top: 1px solid rgba(197, 160, 89, 0.2);
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            article { padding-left: 0; border-left: none; }
+            article::before { display: none; }
+            .hero-runes { font-size: 2rem; }
+        }
+    </style>
 </head>
 <body>
-  <div class="card" role="main">
-    <div class="top-line">
-      <label for="slider">Input your phone number here:</label>
-      <div class="phone" id="phoneDisplay">+7XXXXXXXXXXX</div>
-    </div>
-    <div class="slider-wrap">
-      <input id="slider" type="range" min="0" max="9999999" step="1" value="5000000" aria-label="phone-slider" />
-    </div>
-  </div>
-  <script>
-    const slider = document.getElementById('slider');
-    const phoneDisplay = document.getElementById('phoneDisplay');
-    function getThumbHitRadius(){
-      const cs = getComputedStyle(document.documentElement);
-      const v = cs.getPropertyValue('--thumb-hit-radius').trim();
-      const px = v ? parseFloat(v.replace('px','')) : null;
-      if(!px || isNaN(px)){
-        const ts = cs.getPropertyValue('--thumb-size').trim();
-        const tsv = ts ? parseFloat(ts.replace('px','')) : 32;
-        return Math.max(20, tsv * 0.8);
-      }
-      return px;
-    }
-    let THUMB_HIT = getThumbHitRadius();
-    function updateTrackPercent(){
-      const pct = (slider.value - slider.min) / (slider.max - slider.min) * 100;
-      slider.style.setProperty('--pct', pct + '%');
-    }
-    function randomNDigits(n){
-      const max = Math.pow(10, n);
-      const num = Math.floor(Math.random() * max);
-      return String(num).padStart(n, '0');
-    }
-    function randomOperator(){
-      return Math.floor(Math.random() * (999 - 901 + 1)) + 901;
-    }
-    function randomPrefix(){
-      return '+7' + String(randomOperator());
-    }
-    function showRandom(){
-      const prefix = randomPrefix();
-      const subscriber = randomNDigits(7);
-      phoneDisplay.textContent = prefix + subscriber;
-    }
-    function getThumbX(){
-      const rect = slider.getBoundingClientRect();
-      const min = Number(slider.min), max = Number(slider.max);
-      const val = Number(slider.value);
-      const ratio = (val - min) / (max - min);
-      return rect.left + ratio * rect.width;
-    }
-    function isPointerOnThumb(clientX){
-      const thumbX = getThumbX();
-      return Math.abs(clientX - thumbX) <= THUMB_HIT;
-    }
-    slider.addEventListener('pointerdown', (e) => {
-      if(typeof e.clientX === 'number'){
-        if(!isPointerOnThumb(e.clientX)){
-          e.preventDefault();
-          e.stopPropagation();
-          slider.blur();
-          return;
-        }
-      }
-    }, {passive:false});
-    slider.addEventListener('touchstart', (e) => {
-      const t = e.touches && e.touches[0];
-      if(t && typeof t.clientX === 'number'){
-        if(!isPointerOnThumb(t.clientX)){
-          e.preventDefault();
-          e.stopPropagation();
-          slider.blur();
-        }
-      }
-    }, {passive:false});
-    slider.addEventListener('click', (e) => {
-      if(typeof e.clientX === 'number' && !isPointerOnThumb(e.clientX)){
-        e.preventDefault();
-        e.stopPropagation();
-        slider.blur();
-      }
-    }, {passive:false});
-    slider.addEventListener('input', () => {
-      showRandom();
-      updateTrackPercent();
-    });
-    window.addEventListener('load', () => {
-      showRandom();
-      updateTrackPercent();
-      THUMB_HIT = getThumbHitRadius();
-    });
-    window.addEventListener('resize', () => {
-      THUMB_HIT = getThumbHitRadius();
-      updateTrackPercent();
-    });
-  </script>
+
+    <header>
+        <div class="hero-runes">𐱅𐰇𐰼𐰰:𐰉𐰆𐰑𐰣</div> <!-- Turk Bodun (Turkic People) -->
+        <h1>The Eternal Inscription</h1>
+        <p class="subtitle">Deciphering Kül Tigin: Politics, Cosmos, and War</p>
+        <div class="scroll-indicator">↓</div>
+    </header>
+
+    <main>
+
+        <!-- Intro -->
+        <div style="text-align: center; margin-bottom: 100px;">
+            <p style="font-size: 1.4rem; color: var(--accent-gold);">
+                "When the blue sky was created above and the dark earth below, between them the sons of men were created..."
+            </p>
+        </div>
+
+        <!-- Section 1: Cosmology -->
+        <article>
+            <h2 class="question-header">I. Worldview: "Blue Sky" and "Dark Earth"</h2>
+            <div class="answer-text">
+                The reference to the <span class="highlight">"Blue Sky" (Tengri)</span> and the "Dark Earth" is not merely poetic metaphor. It is the foundation of political legitimacy. The Kök Turks believed their state was divinely sanctioned, and the Kagan’s power was bestowed by Heaven itself.
+                <br><br>
+                They viewed themselves as the center of a cosmic order, where political stability on earth depended directly on harmony with celestial forces. Chaos in the state meant a violation of Tengri’s will.
+            </div>
+        </article>
+
+        <div class="separator">❖</div>
+
+        <!-- Section 2: Leadership -->
+        <article>
+            <h2 class="question-header">II. The Kagan: Architect of the Empire</h2>
+            <div class="answer-text">
+                The inscription depicts a ruler who "organized and created." This implies that leadership in the Khaganate went far beyond military command.
+                <br><br>
+                The Kagan was the <span class="highlight">Guardian of Institutions (El)</span> and Laws (Tore). His power was sacred, yet it carried the heavy burden of responsibility: to unite the tribes, establish just laws, and ensure the prosperity of society. It was a meritocracy sanctified by tradition.
+            </div>
+        </article>
+
+        <div class="separator">❖</div>
+
+        <!-- Section 3: Warfare -->
+        <article>
+            <h2 class="question-header">III. Sword and Power: The Role of War</h2>
+            <div class="answer-text">
+                War was the empire's circulatory system. The text speaks openly of subduing enemies ("I made those with heads bow down").
+                <blockquote>
+                    "For the sake of the Turkic people, I did not sleep by night nor rest by day."
+                </blockquote>
+                Military success not only ensured security in the harsh steppe environment but served as the primary proof that Heaven favored the ruler. Without victory, there was no legitimacy.
+            </div>
+        </article>
+
+        <div class="separator">❖</div>
+
+        <!-- Section 4: Qualities -->
+        <article>
+            <h2 class="question-header">IV. Wisdom and Bravery</h2>
+            <div class="answer-text">
+                Imperial stability rested on personal example. The inscription emphasizes: the Kagans were wise, and the Beys (officers) were brave.
+                <br><br>
+                The justice of the leaders created a <span class="highlight">vertical of trust</span>. When the elite is just, the people (Bodun) are loyal. The collapse of the empire is often linked in the text specifically to the degradation of elites—when "foolish Kagans" and "cowardly Beys" ascended to power.
+            </div>
+        </article>
+
+        <div class="separator">❖</div>
+
+        <!-- Section 5: Purpose -->
+        <article>
+            <h2 class="question-header">V. Memory in Stone</h2>
+            <div class="answer-text">
+                Why did they write on stone? To defeat time. The Orkhon inscriptions are a political testament.
+                <br><br>
+                By recording their achievements, the Turks were constructing a <span class="highlight">unified identity</span>. Reading these lines, a descendant was meant to feel not just a member of a tribe, but pride in the great "Eternal El." It was a tool for nation-building through shared historical memory.
+            </div>
+        </article>
+
+        <div class="separator">❖</div>
+
+        <!-- Section 6: Geography -->
+        <article>
+            <h2 class="question-header">VI. Scale of Empire: From Qadirkhan to the Iron Gate</h2>
+            <div class="answer-text">
+                Geographic markers (the "Forest of Qadirkhan" in the East, the "Iron Gate" in the West) serve as proof of geopolitical might.
+                <br><br>
+                Listing distant lands legitimizes the Turks' right to dominate Eurasia. It is a message to the reader: "Look how far the hand of your Kagan reaches." This inspired fear in enemies and pride in subjects.
+            </div>
+        </article>
+
+        <div class="separator">❖</div>
+
+        <!-- Section 7: Pride -->
+        <article>
+            <h2 class="question-header">VII. Heritage and Pride</h2>
+            <div class="answer-text">
+                The inscription is permeated with a sense of dignity. It does not plead; it asserts.
+                <br><br>
+                The text constructs the image of the Turks as a victor-nation, a people with a great destiny. Even when describing past defeats, the author does so to highlight subsequent resurgence and resilience. It is a manifesto of power, designed to convince the world of the empire's endurance.
+            </div>
+        </article>
+
+        <div class="separator">❖</div>
+
+        <!-- Section 8: Lessons -->
+        <article>
+            <h2 class="question-header">VIII. A Covenant for the Future</h2>
+            <div class="answer-text">
+                The main lesson of the inscription is a warning.
+                <br><br>
+                <span class="highlight">"O Turkic people, if you go to China, you will perish."</span><br>
+                The stone teaches that strength lies in unity and loyalty to ancestral traditions. The sweetness of foreign words and the softness of silk are traps. Only by preserving their culture and obeying wise leaders can the nation remain eternal.
+            </div>
+        </article>
+
+    </main>
+
+    <footer>
+        <div class="hero-runes" style="font-size: 1.5rem; color: var(--accent-gold);">𐱅𐰇𐰼𐰰</div>
+        <p>© 2025 Historical Interactive Strategy.</p>
+        <p style="margin-top: 10px; font-size: 0.8rem; color: #555;">Designed for immersive learning.</p>
+    </footer>
+
+    <script>
+        // --- Scroll Animation Logic ---
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const articles = document.querySelectorAll('article');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.2 // Element must be 20% visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // Uncomment line below if you want animation to play only once:
+                        // observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            articles.forEach(article => {
+                observer.observe(article);
+            });
+            
+            // Scroll on arrow click
+            document.querySelector('.scroll-indicator').addEventListener('click', () => {
+                window.scrollTo({
+                    top: window.innerHeight,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
